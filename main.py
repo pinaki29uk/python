@@ -1,6 +1,7 @@
 from flask import Flask
 import os
 import pyodbc
+import uvicorn
 
 # Create an instance of the Flask class that is the WSGI application.
 # The first argument is the name of the application module or package,
@@ -12,13 +13,15 @@ app = Flask(__name__)
 # and add decorators to define the appropriate resource locators for them.
 
 @app.route('/')
+@app.route('/hello')
 def hello():
    # Render the page
    return "Hello Python!"
 
 if __name__ == '__main__':
    # Run the app server on localhost:4449
-   app.run(debug=True, host='0.0.0.0')
+   #app.run(debug=True, host='0.0.0.0')
+   uvicorn.run()
 
 ##connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:energyclerksqldb.database.windows.net,1433;Database=energyclerkSQLdb;Uid=sqladmin;Pwd=DBadmin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 
