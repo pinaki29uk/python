@@ -1,7 +1,6 @@
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 import os
-import pyodbc
 
 # Create an instance of the Flask class that is the WSGI application.
 # The first argument is the name of the application module or package,
