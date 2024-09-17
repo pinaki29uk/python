@@ -13,7 +13,9 @@ app = Flask("app", static_folder='static', template_folder="templates")
 # To add other resources, create functions that generate the page contents
 # and add decorators to define the appropriate resource locators for them.
 
-connection_string="Driver={ODBC Driver 17 for SQL Server};Server=tcp:energyclerksqldb.database.windows.net,1433;Database=energyclerkSQLdb;Uid=sqladmin;Pwd=DBadmin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+#connection_string="Driver={ODBC Driver 17 for SQL Server};Server=tcp:energyclerksqldb.database.windows.net,1433;Database=energyclerkSQLdb;Uid=sqladmin;Pwd=DBadmin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+connection_string=os.environ['SQL_Database_Connection_String']
+
 field1=""
 field2=""
 print(connection_string)
