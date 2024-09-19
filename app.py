@@ -17,6 +17,9 @@ app = Flask("app", static_folder='static', template_folder="templates")
 
 #connection_string="Driver={ODBC Driver 17 for SQL Server};Server=tcp:energyclerksqldb.database.windows.net,1433;Database=energyclerkSQLdb;Uid=sqladmin;Pwd=DBadmin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 keyVaultName = os.environ["KEY_VAULT_NAME"]
+sqluser_secretname=os.environ["USRNAME_SECRET"]
+sqlpass_secretname=os.environ["SQLPASSWORD"]
+
 KVUri = f"https://{keyVaultName}.vault.azure.net"
 
 credential = DefaultAzureCredential()
@@ -24,11 +27,11 @@ client = SecretClient(vault_url=KVUri, credential=credential)
 
 print(f"Retrieving your secret from {keyVaultName}.")
 
-retrieved_secret = client.get_secret(SQLUSERNAME)
+retrieved_secret = client.get_secret(sqluser_secretname)
 
 sqluser = '{retrieved_secret.value}'
 
-retrieved_secret = client.get_secret(SQLPASSWORD)
+retrieved_secret = client.get_secret(sqlpass_secretname)
 sqlpassword = '{retrieved_secret.value}'
 
 connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"+os.environ['SQLSERVER_NAME']+",1433;Database="+os.environ['DBNAME']+";Uid="+{sqluser}+";")+"Pwd={"+{sqlpassword}+"};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
