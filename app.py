@@ -24,6 +24,7 @@ KVUri = f"https://{vaultname}.vault.azure.net"
 print(f"key vault uri {KVUri}.")
 
 credential = DefaultAzureCredential()
+credential.get_token("https://management.azure.com/.default")
 client = SecretClient(vault_url=KVUri, credential=credential)
 
 print(f"Retrieving your secret from {keyVaultName}.")
