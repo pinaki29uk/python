@@ -26,9 +26,12 @@ print(f"Retrieving your secret from {keyVaultName}.")
 
 retrieved_secret = client.get_secret(SQLUSERNAME)
 
-print(f"your sql username is {retrieved_secret.value}.")
+sqluser = '{retrieved_secret.value}'
 
-connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"+os.environ['SQLSERVER_NAME']+",1433;Database="+os.environ['DBNAME']+";Uid="+os.environ['USRNAME']+";")+"Pwd={"+os.environ['PASSWORD']+"};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+retrieved_secret = client.get_secret(SQLPASSWORD)
+sqlpassword = '{retrieved_secret.value}'
+
+connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"+os.environ['SQLSERVER_NAME']+",1433;Database="+os.environ['DBNAME']+";Uid="+{sqluser}+";")+"Pwd={"+{sqlpassword}+"};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
 field1=""
 field2=""
