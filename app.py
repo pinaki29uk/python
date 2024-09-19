@@ -16,11 +16,12 @@ app = Flask("app", static_folder='static', template_folder="templates")
 # and add decorators to define the appropriate resource locators for them.
 
 #connection_string="Driver={ODBC Driver 17 for SQL Server};Server=tcp:energyclerksqldb.database.windows.net,1433;Database=energyclerkSQLdb;Uid=sqladmin;Pwd=DBadmin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
-keyVaultName = os.environ["KEY_VAULT_NAME"]
+keyVaultName = os.environ["KEY_VAULT_NAME"].str.lower()
 sqluser_secretname=os.environ["USRNAME_SECRET"]
 sqlpass_secretname=os.environ["SQLPASSWORD_SECRET"]
 
 KVUri = f"https://{keyVaultName}.vault.azure.net"
+print(f"key vault uri {KVUri}.")
 
 credential = DefaultAzureCredential()
 client = SecretClient(vault_url=KVUri, credential=credential)
