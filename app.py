@@ -1,5 +1,7 @@
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
+from azure.keyvault.secrets import SecretClient
+from azure.identity import DefaultAzureCredential
 import os
 import pyodbc
 
@@ -14,6 +16,17 @@ app = Flask("app", static_folder='static', template_folder="templates")
 # and add decorators to define the appropriate resource locators for them.
 
 #connection_string="Driver={ODBC Driver 17 for SQL Server};Server=tcp:energyclerksqldb.database.windows.net,1433;Database=energyclerkSQLdb;Uid=sqladmin;Pwd=DBadmin123;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+keyVaultName = os.environ["KEY_VAULT_NAME"]
+KVUri = f"https://{keyVaultName}.vault.azure.net"
+
+credential = DefaultAzureCredential()
+client = SecretClient(vault_url=KVUri, credential=credential)
+
+print(f"Retrieving your secret from {keyVaultName}.")
+
+retrieved_secret = client.get_secret(SQLUSERNAME)
+
+print(f"your sql username is {retrieved_secret.value}.")
 
 connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"+os.environ['SQLSERVER_NAME']+",1433;Database="+os.environ['DBNAME']+";Uid="+os.environ['USRNAME']+";")+"Pwd={"+os.environ['PASSWORD']+"};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
