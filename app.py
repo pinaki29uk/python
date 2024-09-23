@@ -32,7 +32,7 @@ print(f"Retrieving your secret from {keyVaultName}.")
 
 retrieved_secret = client.get_secret(sqluser_secretname)
 
-sqluser = '{retrieved_secret.value}'
+sqluser = retrieved_secret.value
 
 print(f"sqluser name is {sqluser}.")
 
