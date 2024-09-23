@@ -39,6 +39,8 @@ print(f"sqluser name is {sqluser}.")
 retrieved_secret = client.get_secret(sqlpass_secretname)
 sqlpassword = retrieved_secret.value
 
+print(f"sqlpassword is {sqlpassword}.")
+
 connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"+os.environ['SQLSERVER_NAME']+",1433;Database="+os.environ['DBNAME']+";Uid="+{sqluser}+";")+"Pwd={"+{sqlpassword}+"};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
 
 field1=""
