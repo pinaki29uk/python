@@ -41,7 +41,7 @@ connection_string = str("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"+os.
 
 field1=""
 field2=""
-print(connection_string)
+
 with pyodbc.connect(connection_string) as conn:
 
     with conn.cursor() as cursor:
